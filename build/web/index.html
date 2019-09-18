@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+ <script>
+            $(document).ready(function(){
+                $("#txtResultado").click(function(){
+                    $.ajax({
+                        type: "POST", //METODO POST
+                        url: "NewServlet", //URL DESTINO
+                        data: $("#form1").serialize(), 
+                        success: function(data)
+                        {
+                            $("#div-resultado").val(data); 
+                            $("#mensajeExito").fadeIn(2000);
+                            $("#mensajeExito").fadeOut(2000);
+                        }
+                    });
+                });                                                              
+            });            
+        </script>        
+        <div class="alert alert-success" id="mensajeExito" role="alert" style="display: none;" >
+            Calculo registrado Exitosamente
+        </div>  
+        
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Sumar
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Restar
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Multiplicar
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Dividir
+        </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Calculadora de Suma</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form action="NewServlet" id="form1" method="post">
+                        <label>Ingrese Primer Numero</label><br>                
+                        <input type="text" id="primerNumero" name="primerNumero" placeholder="Ingrese primer numero" class="form-control"/> <br>                
+                        <label>Ingrese Segundo Numero</label><br>
+                        <input type="text" id="segundoNumero" name="segundoNumero"  placeholder="Ingrese segundo numero"  class="form-control"/><br>
+                        <input type="submit" id="btnSumar" class="btn btn-primary" name="btnSumar" value="Sumar"><br><br>
+                        <input type="text" id="txtResultado" name="resultado"  placeholder="resultado"  class="form-control"/>     
+                    </form> 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Cerrar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </body>
+</html>
